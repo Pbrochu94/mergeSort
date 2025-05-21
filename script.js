@@ -18,10 +18,11 @@ function fibsRec(num) {
     return fibsRec(num - 1) + fibsRec(num - 2);
   }
 }
+console.log(fibsRec(10));
 
 /**Merge sort */
 
-let array = [5, 3, 1, 2, 4];
+let array = [3, 2, 1, 13, 8, 5, 0, 1];
 console.log(mergeSort(array));
 
 function mergeSort(arr) {
@@ -40,12 +41,14 @@ function mergeSort(arr) {
   let leftHalf = arr.splice(0, middleIndex);
   let newLeftHalf = mergeSort(leftHalf);
   let newRightHalf = mergeSort(arr);
-  for (let index = 0; index < newLeftHalf.length; index++) {
-    if (newRightHalf[0] < newLeftHalf[index]) {
-      let placeHolder = newRightHalf[0];
-      newRightHalf[0] = newLeftHalf[index];
-      newLeftHalf[index] = placeHolder;
+  let sortedArray = [];
+  let length = newLeftHalf.length + newRightHalf.length;
+  for (let index = 0; index < length; index++) {
+    if (newRightHalf[0] < newLeftHalf[0] || newLeftHalf.length === 0) {
+      sortedArray[index] = newRightHalf.shift();
+    } else {
+      sortedArray[index] = newLeftHalf.shift();
     }
   }
-  return newLeftHalf.concat(newRightHalf);
+  return sortedArray;
 }
